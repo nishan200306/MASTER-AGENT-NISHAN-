@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AGENT NISHAN</title>
   <meta name="theme-color" content="#1f57ff"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -17,12 +19,10 @@
 
       --ok:#16a34a;
 
-      /* Button brand colors + RGB (for glows) */
       --whatsapp:#25D366;   --whatsapp-rgb:37,211,102;
       --call:#0ea5e9;       --call-rgb:14,165,233;
       --email:#ea4335;      --email-rgb:234,67,53;
 
-      /* Brand text colors */
       --brand-blue:#1f57ff;
       --brand-red:#ff2d55;
       --brand-yellow:#fec400;
@@ -51,7 +51,8 @@
       width:100%; height:auto; display:block; filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));
       transform:rotate(var(--rot, 0deg)); animation:floaty var(--s, 6s) ease-in-out infinite alternate; will-change: transform;
     }
-    @keyframes drift{to{transform:translateX(140vw)}} @keyframes drift-rtl{to{transform:translateX(-140vw)}}
+    @keyframes drift{to{transform:translateX(140vw)}}
+    @keyframes drift-rtl{to{transform:translateX(-140vw)}}
     @keyframes floaty{from{transform:translateY(-8px) rotate(var(--rot,0))} to{transform:translateY(8px) rotate(var(--rot,0))}}
 
     /* Splash */
@@ -81,7 +82,7 @@
     @keyframes btnGlow{
       0%{box-shadow:0 0 0 0 rgba(var(--btn-rgb), .22), 0 0 16px 0 rgba(var(--btn-rgb), .25)}
       50%{box-shadow:0 0 0 6px rgba(var(--btn-rgb), 0), 0 0 26px 6px rgba(var(--btn-rgb), .45)}
-      100%{box-shadow:0 0 0 0 rgba(var(--btn-rgb), 0), 0 0 16px 0 rgba(var(--btn-rgb), .25)}
+      100%{box-shadow:0 0 0 0 rgba(var(--btn-rgb), .25), 0 0 16px 0 rgba(var(--btn-rgb), .25)}
     }
 
     /* App wrapper */
@@ -96,15 +97,17 @@
     .brand{display:flex; flex-direction:column; gap:6px}
     .brand h1{font-size:24px; margin:0; font-weight:900; letter-spacing:.6px}
 
-    /* Online badge (SMALLER NOW) */
+    /* Online badge */
     .online{
       position:relative; display:inline-flex; align-items:center; gap:6px; color:#dfffe7;
       background:linear-gradient(90deg, rgba(34,197,94,.18), rgba(34,197,94,.38), rgba(34,197,94,.18)); background-size:200% 100%;
-      border:1px solid rgba(22,163,74,.45); padding:4px 8px; border-radius:999px; font-weight:800; font-size:12px;
+      border:1px solid rgba(22,163,74,.45); padding:2px 8px; border-radius:999px; font-weight:800; font-size:12px;
+      width:auto; max-width:max-content; white-space:nowrap;
       animation:greenShimmer 2.8s linear infinite, glowPulse 1.8s ease-in-out infinite;
     }
     .online .dot{position:relative; width:8px; height:8px; border-radius:50%; background:var(--ok)}
     .online .dot::after{content:""; position:absolute; inset:0; border-radius:50%; background:rgba(22,163,74,.35); animation:ping 1.6s ease-out infinite}
+    .online .count{font-variant-numeric: tabular-nums}
 
     /* Card */
     .card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow); border-radius:16px; padding:16px}
@@ -119,22 +122,60 @@
     .btn + .btn{margin-top:14px}
     .btn.effect{background:linear-gradient(90deg, rgba(var(--btn-rgb), .22), rgba(var(--btn-rgb), .45), rgba(var(--btn-rgb), .22)); background-size:200% 100%; border-color:rgba(var(--btn-rgb), .45); animation:greenShimmer 2.8s linear infinite, btnGlow 1.8s ease-in-out infinite}
     .btn-whatsapp{--btn-rgb:var(--whatsapp-rgb)} .btn-call{--btn-rgb:var(--call-rgb)} .btn-email{--btn-rgb:var(--email-rgb)}
+    /* Make BANK DETAILS button pink */
+    .btn-bank{--btn-rgb:236,72,153} /* #ec4899 */
+
+    /* Equal English font style for the 4 main buttons */
+    .btn-eng{
+      font-family: 'Montserrat', 'Poppins', 'Segoe UI', Roboto, Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    /* Service title above WhatsApp */
+    .service-title{
+      font-family:'Montserrat','Poppins','Segoe UI',Roboto,Arial,sans-serif;
+      color:var(--brand-yellow);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:18px;
+      text-align:center;
+      margin-bottom:12px;
+      text-shadow:0 0 14px rgba(254,196,0,.25);
+    }
 
     /* AVAILABLE SITE */
     .brands{margin-top:18px}
-    .available-title{margin:0 0 12px 0; font-size:16px; font-weight:900; letter-spacing:.3px; color:#22c55e}
-    .brand-grid{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px}
+    .available-title{
+      margin:0 0 12px 0; font-size:16px; font-weight:900; letter-spacing:.3px; color:#22c55e;
+      display:flex; align-items:center; gap:8px;
+    }
+    .ok-icon{width:18px; height:18px; color:#22c55e; flex:0 0 18px}
+    .brand-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px
+    }
     .brand-tag{
       display:flex; align-items:center; justify-content:center; min-height:64px; border-radius:14px; padding:10px;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08);
       text-transform:uppercase; font-weight:900; letter-spacing:.8px; font-size:20px; text-align:center;
+      text-decoration:none; color:inherit; cursor:pointer;
     }
-    .brand-note{text-align:center; color:var(--muted); margin-top:10px; font-size:14px}
+    .brand-note{text-align:center; color:#a8b3d9; margin-top:10px; font-size:14px}
+    .brand-note-en{text-align:center; color:#cfe4ff; margin-top:4px; font-size:13px; font-weight:800; letter-spacing:.5px}
     .c-white{color:#ffffff} .c-blue{color:var(--brand-blue)} .c-red{color:var(--brand-red)} .c-yellow{color:var(--brand-yellow)}
 
     /* Promo */
     .promo{margin-top:18px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center}
-    .promo-line{margin:0; font-size:18px; font-weight:900}
+    .promo-line{
+      margin:0;
+      font-size:16px;    /* smaller */
+      font-weight:600;   /* thinner */
+    }
     .code-badge{
       display:inline-flex; align-items:center; gap:10px;
       background:rgba(255,255,255,.06); border:1px dashed rgba(255,255,255,.25);
@@ -143,7 +184,7 @@
     .btn-copy{--btn-rgb:34,197,94; width:auto; align-self:center; padding:12px 14px; border-radius:12px}
     .btn-copy svg{width:18px; height:18px}
 
-    /* Toast (promo copied message) */
+    /* Toast */
     .toast{
       position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
       padding:10px 14px; border-radius:12px; font-weight:800; color:#fff;
@@ -151,7 +192,6 @@
       opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease;
       z-index:10000;
     }
-    /* Make toast animate like WhatsApp button while visible */
     .toast.effect{
       --btn-rgb:var(--whatsapp-rgb);
       background:linear-gradient(90deg, rgba(var(--btn-rgb), .22), rgba(var(--btn-rgb), .45), rgba(var(--btn-rgb), .22));
@@ -161,8 +201,45 @@
     }
     .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 
+    /* Modal (Deposit Bank Details) */
+    .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(2,6,23,.6); backdrop-filter:blur(2px); z-index:10040}
+    .modal.show{display:flex}
+    .modal-card{
+      width:min(780px,94vw); max-height:86vh; overflow:auto;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.12); border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.45);
+      padding:16px;
+    }
+    .modal-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
+    .modal-title{margin:0; font-size:20px; font-weight:900; letter-spacing:.5px}
+    .btn-close{
+      background:#ef4444; color:#fff; border:none; border-radius:10px; font-weight:800; padding:8px 10px; cursor:pointer;
+      font-family: 'Montserrat', 'Poppins', 'Segoe UI', Roboto, Arial, sans-serif;
+      text-transform: uppercase; letter-spacing:.5px;
+    }
+
+    .alert-red{
+      border:1px solid rgba(239,68,68,.7); background:linear-gradient(180deg, rgba(239,68,68,.18), rgba(239,68,68,.08));
+      color:#ffe8e8; padding:12px; border-radius:12px; margin:8px 0 14px; font-weight:700
+    }
+    .alert-red .title{color:#ff6b6b; font-weight:900; margin-bottom:6px}
+
+    .bank{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:12px; margin-top:12px}
+    .bank-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
+    .bank-name{font-weight:900; font-size:18px}
+    .copy-all{--btn-rgb:34,197,94; background:linear-gradient(90deg, rgba(var(--btn-rgb), .22), rgba(var(--btn-rgb), .45), rgba(var(--btn-rgb), .22)); background-size:200% 100%; border:1px solid rgba(var(--btn-rgb), .45); color:#fff; border-radius:10px; padding:6px 10px; font-weight:800; cursor:pointer; animation:greenShimmer 2.8s linear infinite, btnGlow 1.8s ease-in-out infinite; font-family:'Montserrat',sans-serif; text-transform:uppercase; letter-spacing:.5px}
+    .row{display:grid; grid-template-columns:1.1fr auto 1fr auto; gap:10px; align-items:center; padding:8px 10px; border-radius:10px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); margin-top:6px}
+    .label{color:#dfe7ff; font-weight:700}
+    .arrow{opacity:.7}
+    .value{font-weight:900; color:#fff}
+    .row-copy{
+      background:#22c55e; color:#fff; border:none; border-radius:8px; font-weight:800; padding:6px 8px; cursor:pointer;
+      display:inline-flex; align-items:center; gap:6px; font-family:'Montserrat',sans-serif; text-transform:uppercase; letter-spacing:.4px;
+    }
+    .row-copy svg{width:16px; height:16px}
+
     @media (prefers-reduced-motion: reduce){
-      .ring::before,.online,.online .dot::after,.btn.effect,.toast.effect{animation:none}
+      .ring::before,.online,.online .dot::after,.btn.effect,.toast.effect,.copy-all{animation:none}
       .app{transition:none}
       .money-bg{display:none}
     }
@@ -170,34 +247,17 @@
 </head>
 <body>
 
-  <!-- Floating money background -->
+  <!-- Floating money background (notes) -->
   <div class="money-bg" aria-hidden="true">
-    <!-- few drifting notes -->
-    <div class="note" style="--y:6vh; --size:90px; --d:30s; --del:0s; --rot:-10deg; --s:7s; --op:.13;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
-    <div class="note" style="--y:22vh; --size:70px; --d:36s; --del:3s; --rot:14deg; --s:6s; --op:.12;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
-    <div class="note" style="--y:40vh; --size:110px; --d:44s; --del:6s; --rot:-8deg; --s:8s; --op:.1;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
-    <div class="note" style="--y:68vh; --size:80px; --d:38s; --del:10s; --rot:6deg; --s:7.5s; --op:.14;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
+    <div class="note" style="--y:6vh; --size:90px; --d:30s; --del:0s; --rot:-10deg; --s:7s; --op:.13;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
+    <div class="note" style="--y:22vh; --size:70px; --d:36s; --del:3s; --rot:14deg; --s:6s; --op:.12;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
+    <div class="note" style="--y:40vh; --size:110px; --d:44s; --del:6s; --rot:-8deg; --s:8s; --op:.1;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
+    <div class="note" style="--y:68vh; --size:80px; --d:38s; --del:10s; --rot:6deg; --s:7.5s; --op:.14;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
 
-    <div class="note rtl" style="--y:12vh; --size:75px; --d:34s; --del:2s; --rot:10deg; --s:6.5s; --op:.12;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
-    <div class="note rtl" style="--y:30vh; --size:95px; --d:40s; --del:5s; --rot:-12deg; --s:7s; --op:.1;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
-    <div class="note rtl" style="--y:52vh; --size:65px; --d:28s; --del:8s; --rot:18deg; --s:5.8s; --op:.13;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
-    <div class="note rtl" style="--y:78vh; --size:100px; --d:48s; --del:12s; --rot:-6deg; --s:8.5s; --op:.11;">
-      <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg>
-    </div>
+    <div class="note rtl" style="--y:12vh; --size:75px; --d:34s; --del:2s; --rot:10deg; --s:6.5s; --op:.12;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
+    <div class="note rtl" style="--y:30vh; --size:95px; --d:40s; --del:5s; --rot:-12deg; --s:7s; --op:.1;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
+    <div class="note rtl" style="--y:52vh; --size:65px; --d:28s; --del:8s; --rot:18deg; --s:5.8s; --op:.13;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
+    <div class="note rtl" style="--y:78vh; --size:100px; --d:48s; --del:12s; --rot:-6deg; --s:8.5s; --op:.11;"><svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="118" height="58" rx="10" fill="#16c78422" stroke="#22c55e" stroke-width="2"/><rect x="10" y="10" width="100" height="40" rx="8" fill="#16a34a33"/><circle cx="60" cy="30" r="13" fill="#ffffffdd"/><text x="60" y="35" font-size="18" font-weight="800" text-anchor="middle" fill="#16a34a">$</text></svg></div>
   </div>
 
   <!-- Splash -->
@@ -241,38 +301,65 @@
         </div>
         <div class="brand">
           <h1>AGENT NISHAN</h1>
-          <span class="online"><span class="dot"></span> Online</span>
+          <span class="online" aria-live="polite" aria-label="Users online right now">
+            <span class="dot"></span>
+            Online
+            <span id="online-count" class="count">120</span>
+          </span>
         </div>
       </header>
 
       <!-- Actions -->
       <section class="card section" aria-label="Quick actions">
-        <a class="btn btn-whatsapp effect" href="https://wa.me/qr/RES23KVH34XOG1" target="_blank" rel="noopener">
+        <div class="service-title">NISHAN SERVICE</div>
+
+        <a class="btn btn-whatsapp effect btn-eng" href="https://wa.me/qr/RES23KVH34XOG1" target="_blank" rel="noopener" aria-label="Open WhatsApp chat">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.05 0C5.6 0 .34 5.26.34 11.72c0 2.07.54 4.09 1.57 5.88L0 24l6.6-1.88a11.54 11.54 0 0 0 5.45 1.39h.01c6.45 0 11.71-5.26 11.71-11.71 0-3.13-1.22-6.07-3.25-8.32ZM12.06 21.3h-.01c-1.76 0-3.49-.47-5-1.37l-.36-.21-3.92 1.12 1.05-3.82-.23-.39a9.86 9.86 0 0 1-1.5-5.31C2.09 6.2 6.28 2 11.73 2c2.63 0 5.11 1.03 6.97 2.9a9.83 9.83 0 0 1 2.88 6.96c0 5.45-4.45 9.44-9.52 9.44Zm5.52-7.12c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.78.96-.96 1.15-.18.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.47.13-.62.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.68-1.64-.93-2.25-.24-.57-.49-.49-.68-.5l-.58-.01c-.2 0-.52 .07-.8 .38-.28 .3-1.06 1.03-1.06 2.52 0 1.48 1.09 2.92 1.25 3.12.15 .2 2.14 3.27 5.2 4.48.73 .32 1.3 .5 1.74 .64.73 .23 1.4 .2 1.93 .12.59 -.09 1.77 -.72 2.02 -1.41.25 -.7.25 -1.31.18 -1.44 -.07 -.13 -.26 -.2 -.56 -.35Z"/></svg>
-          WhatsApp Chat එකට යන්න
+          WHATSAPP
         </a>
 
-        <a class="btn btn-call effect" href="tel:0781519931">
+        <a class="btn btn-call effect btn-eng" href="tel:0781519931" aria-label="Call 0781519931">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 6.75c0-1.243 1.007-2.25 2.25-2.25h2.598c.86 0 1.611.548 1.87 1.368l.6 1.8c.2.61.045 1.284-.41 1.74L8.1 10.9a11.25 11.25 0 005 5l1.293-1.002c.456-.355 1.129-.61 1.74-.41l1.8.6c.82.259 1.368 1.01 1.368 1.87V19.5c0 1.243-1.007 2.25-2.25 2.25h-.75C9.354 21.75 2.25 14.646 2.25 6.75z"/></svg>
-          Call (0781519931)
+          CALL
         </a>
 
-        <a class="btn btn-email effect" href="mailto:nishanmessagepvt@gmail.com?subject=Hello%20AGENT%20NISHAN&body=Hi%20Nishan%2C" target="_blank" rel="noopener">
+        <a class="btn btn-email effect btn-eng" href="mailto:nishanmessagepvt@gmail.com?subject=Hello%20AGENT%20NISHAN&body=Hi%20Nishan%2C" target="_blank" rel="noopener" aria-label="Send email">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
-          Email යවන්න
+          EMAIL
         </a>
+
+        <button id="bank-btn" class="btn btn-bank effect btn-eng" type="button" aria-label="Open bank details">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 2 7v2h2v9a2 2 0 0 0 2 2h4v-6h4v6h4a2 2 0 0 0 2-2V9h2V7l-10-5Z"/></svg>
+          BANK DETAILS
+        </button>
       </section>
 
       <!-- AVAILABLE SITE -->
       <section class="section brands">
-        <h3 class="available-title">AVAILABLE SITE</h3>
+        <h3 class="available-title">
+          AVAILABLE SITE
+          <svg class="ok-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm-1.2 13.3-3.6-3.6 1.4-1.4 2.2 2.2 5-5 1.4 1.4-6.4 6.4Z"/>
+          </svg>
+        </h3>
         <div class="brand-grid">
-          <div class="brand-tag"><span class="c-white">1X</span><span class="c-blue">BET</span></div>
-          <div class="brand-tag"><span class="c-white">888</span>&nbsp;<span class="c-red">STARZ</span></div>
-          <div class="brand-tag"><span class="c-white">MEL</span><span class="c-yellow">BET</span></div>
-          <div class="brand-tag"><span class="c-red">PARI</span><span class="c-white">PULSE</span></div>
+          <!-- Row 1: 888STARZ | 1XBET -->
+          <a class="brand-tag" href="https://chill2win.fun/L?tag=d_3939851m_77801c_&site=3939851&ad=77801" target="_blank" rel="noopener" aria-label="Open 888STARZ">
+            <span class="c-white">888</span><span class="c-red">STARZ</span>
+          </a>
+          <a class="brand-tag" href="https://reffpa.com/L?tag=d_4662170m_97c_&site=4662170&ad=97" target="_blank" rel="noopener" aria-label="Open 1XBET">
+            <span class="c-white">1X</span><span class="c-blue">BET</span>
+          </a>
+          <!-- Row 2: PARIPULSE | MELBET -->
+          <a class="brand-tag" href="https://refpa00186.com/L?tag=d_4632574m_64499c_&site=4632574&ad=64499&r=promotions/first-deposit" target="_blank" rel="noopener" aria-label="Open PARIPULSE">
+            <span class="c-red">PARI</span><span class="c-white">PULSE</span>
+          </a>
+          <a class="brand-tag" href="https://refpa3665.com/L?tag=d_4280276m_61553c_&site=4280276&ad=61553" target="_blank" rel="noopener" aria-label="Open MELBET">
+            <span class="c-white">MEL</span><span class="c-yellow">BET</span>
+          </a>
         </div>
-        <div class="brand-note">(මුදල් තැම්පත් කිරීම් සහා නැවත ලබා ගැනීම්.)</div>
+        <div class="brand-note">මුදල් තැම්පත් කිරීම් හා නැවත ලබා ගැනීම්.</div>
+        <div class="brand-note-en">DEPOSIT AND WITHDRAWAL</div>
       </section>
 
       <!-- Promo -->
@@ -281,7 +368,7 @@
         <div id="copy-area" class="code-badge" title="කොපි කිරීමට එබන්න">VIPCNA</div>
         <button id="copy-btn" class="btn btn-copy effect" type="button" aria-label="Copy promo code">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Zm-1.5 3H9.5v2h8v-2Z"/></svg>
-          Promo Code copy කරන්න
+          Promo Code Copy
         </button>
         <p style="margin:8px 0 0; color:#cfe4ff; font-size:13px">
           නව ගිණුම් සෑදීමේදි මෙම කේතය භාවිතා කොට වාසි ලබා ගන්න.
@@ -291,8 +378,114 @@
     </div>
   </main>
 
-  <!-- Toast: will animate like WhatsApp while visible -->
-  <div id="toast" class="toast" role="status" aria-live="polite">Promo code copied!</div>
+  <!-- Modal: Deposit Bank Details -->
+  <div id="bank-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="bank-title">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h3 id="bank-title" class="modal-title">Deposit Bank Details</h3>
+        <button id="bank-close" class="btn-close" type="button">Close ✕</button>
+      </div>
+
+      <div class="alert-red">
+        <div class="title">MASTER AGENT NISHAN උපදෙස්</div>
+        <div>( පහත සදහන් BANK DETAILS වලින් ඕනෑම ගිණුමකට මුදල් බැර කර , මුදල් දැමූ බවට ඔබ සතුව ඇති SLIP එක හෝ PDF එක සමග ඔබගේ ගේම් ID 074 230 99 31  යන whatapp අංකයට විනාඩි 5 ඇතුළත යොමු කරන්න . )</div>
+      </div>
+
+      <!-- I PAY -->
+      <section class="bank" id="bank-ipay">
+        <div class="bank-head">
+          <div class="bank-name">I PAY</div>
+          <button class="copy-all" data-copy-group="ipay">Copy All</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙤</div><div class="arrow">☛</div>
+          <div class="value" data-group="ipay">074 306 6234</div>
+          <button class="row-copy" data-copy="074 306 6234" type="button" aria-label="Copy account number">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy
+          </button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙖𝙢𝙚</div><div class="arrow">☛</div>
+          <div class="value" data-group="ipay">Sasana rt</div>
+          <button class="row-copy" data-copy="Sasana rt" type="button" aria-label="Copy account name">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy
+          </button>
+        </div>
+      </section>
+
+      <!-- BOC -->
+      <section class="bank" id="bank-boc">
+        <div class="bank-head">
+          <div class="bank-name">BOC</div>
+          <button class="copy-all" data-copy-group="boc">Copy All</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙤</div><div class="arrow">☛</div>
+          <div class="value" data-group="boc">0090575518</div>
+          <button class="row-copy" data-copy="0090575518" type="button" aria-label="Copy account number"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙖𝙢𝙚</div><div class="arrow">☛</div>
+          <div class="value" data-group="boc">Sasana rt</div>
+          <button class="row-copy" data-copy="Sasana rt" type="button" aria-label="Copy account name"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘽𝙧𝙖𝙣𝙘𝙝</div><div class="arrow">☛</div>
+          <div class="value" data-group="boc">Baduraliya</div>
+          <button class="row-copy" data-copy="Baduraliya" type="button" aria-label="Copy branch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+      </section>
+
+      <!-- PEOPLE'S' BANK -->
+      <section class="bank" id="bank-peoples">
+        <div class="bank-head">
+          <div class="bank-name">PEOPLE'S' BANK</div>
+          <button class="copy-all" data-copy-group="peoples">Copy All</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙤</div><div class="arrow">☛</div>
+          <div class="value" data-group="peoples">070200120065175</div>
+          <button class="row-copy" data-copy="070200120065175" type="button" aria-label="Copy account number"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙖𝙢𝙚</div><div class="arrow">☛</div>
+          <div class="value" data-group="peoples">Sasana rt</div>
+          <button class="row-copy" data-copy="Sasana rt" type="button" aria-label="Copy account name"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘽𝙧𝙖𝙣𝙘𝙝</div><div class="arrow">☛</div>
+          <div class="value" data-group="peoples">Matugama</div>
+          <button class="row-copy" data-copy="Matugama" type="button" aria-label="Copy branch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+      </section>
+
+      <!-- LOLC FINANCE -->
+      <section class="bank" id="bank-lolc">
+        <div class="bank-head">
+          <div class="bank-name">LOLC FINANCE</div>
+          <button class="copy-all" data-copy-group="lolc">Copy All</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙤</div><div class="arrow">☛</div>
+          <div class="value" data-group="lolc">10310007330</div>
+          <button class="row-copy" data-copy="10310007330" type="button" aria-label="Copy account number"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘼𝙘𝙘𝙤𝙪𝙣𝙩 𝙉𝙖𝙢𝙚</div><div class="arrow">☛</div>
+          <div class="value" data-group="lolc">Sasana rt</div>
+          <button class="row-copy" data-copy="Sasana rt" type="button" aria-label="Copy account name"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+        <div class="row">
+          <div class="label">𝘽𝙧𝙖𝙣𝙘𝙝</div><div class="arrow">☛</div>
+          <div class="value" data-group="lolc">Baduraliya</div>
+          <button class="row-copy" data-copy="Baduraliya" type="button" aria-label="Copy branch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1Zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2Z"/></svg> Copy</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied!</div>
 
   <script>
     // Splash -> reveal app
@@ -306,31 +499,75 @@
       }, 2000);
     });
 
-    // Copy promo code
-    const PROMO = 'VIPCNA';
-    const toast = document.getElementById('toast');
+    // Dynamic Online Count
+    const onlineSpan = document.getElementById('online-count');
+    function randInt(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+    function updateOnline(){
+      const n = randInt(94,150);
+      if (onlineSpan){ onlineSpan.textContent = n; }
+    }
+    updateOnline();
+    setInterval(updateOnline, 10000);
 
-    async function copyCode() {
-      try {
-        await navigator.clipboard.writeText(PROMO);
-      } catch (e) {
-        const ta = document.createElement('textarea');
-        ta.value = PROMO; document.body.appendChild(ta); ta.select();
-        try { document.execCommand('copy'); } catch (_) {}
+    // Toast helper
+    const toast = document.getElementById('toast');
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('effect','show');
+      setTimeout(()=>{ toast.classList.remove('show'); toast.classList.remove('effect'); }, 1800);
+    }
+    async function copyText(text){
+      try{ await navigator.clipboard.writeText(text); }
+      catch(e){
+        const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); }catch(e){}
         document.body.removeChild(ta);
       }
-      // Show animated WhatsApp-like toast
-      toast.textContent = 'Promo code copied: ' + PROMO;
-      toast.classList.add('effect');   // add animation styles
-      toast.classList.add('show');     // fade/slide in
-      setTimeout(() => {
-        toast.classList.remove('show');
-        toast.classList.remove('effect'); // remove animations after hide
-      }, 1800);
+      showToast('Copied: ' + text);
     }
 
-    document.getElementById('copy-btn')?.addEventListener('click', copyCode);
-    document.getElementById('copy-area')?.addEventListener('click', copyCode);
+    // Promo code copy
+    const PROMO = 'VIPCNA';
+    document.getElementById('copy-btn')?.addEventListener('click', ()=>copyText(PROMO));
+    document.getElementById('copy-area')?.addEventListener('click', ()=>copyText(PROMO));
+
+    // Bank modal open/close
+    const bankBtn = document.getElementById('bank-btn');
+    const bankModal = document.getElementById('bank-modal');
+    const bankClose = document.getElementById('bank-close');
+
+    bankBtn?.addEventListener('click', ()=>{
+      bankModal.classList.add('show');
+      document.body.style.overflow='hidden';
+    });
+    function closeBank(){
+      bankModal.classList.remove('show');
+      document.body.style.overflow='';
+    }
+    bankClose?.addEventListener('click', closeBank);
+    bankModal?.addEventListener('click', (e)=>{ if(e.target === bankModal) closeBank(); });
+
+    // Single value copy buttons
+    document.querySelectorAll('.row-copy').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const txt = btn.getAttribute('data-copy') || '';
+        copyText(txt);
+      });
+    });
+
+    // Copy-all per bank
+    document.querySelectorAll('[data-copy-group]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-copy-group');
+        const values = Array.from(document.querySelectorAll('[data-group="'+id+'"]')).map(el=>{
+          const label = el.previousElementSibling?.previousElementSibling?.textContent.trim().replace(/\s+/g,' ');
+          return label + ' ☛ ' + el.textContent.trim();
+        });
+        const title = btn.closest('.bank')?.querySelector('.bank-name')?.textContent.trim() || 'BANK';
+        const allText = [title, ...values].join('\n');
+        copyText(allText);
+      });
+    });
   </script>
 </body>
-</html>
+    </html>
